@@ -19,6 +19,7 @@ status:
 stop:
 	docker-compose -f docker/local/docker-compose.yml down
 
+# production環境
 .PHONY: prod.setup
 prod.setup:
 	docker build --build-arg JAR_FILE=build/libs/\*.jar -t springio/gs-spring-boot-docker -f docker/production/java/Dockerfile .
