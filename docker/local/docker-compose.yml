@@ -1,7 +1,7 @@
 version: "3" # docker-composeのバージョンを指定
 services:
   app:
-    container_name: local_springwork2000g0_app
+    container_name: springsample_app
     build:
       context: ../../
       dockerfile: ./docker/local/java/Dockerfile
@@ -9,16 +9,34 @@ services:
     volumes:
       - ../../../SpringSample:/app:cached
     environment:
-      JAVA_ENV: development
+      MYSQL_HOST: springsample_db
+      DATABASE_NAME: local_db
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
     ports:
       - "8080:8080"
     privileged: true
     tty: true
-    command: >
-      sh -c '
-          ./gradlew
-          ./gradlew bootRun
-      '
+    command: ./gradlew bootRun
+    networks:
+      - spring-sample-network
+
+  mysql:
+    container_name: springsample_db
+    build:
+      context: ../../
+      dockerfile: ./docker/local/mysql/Dockerfile
+    ports:
+      - "3306:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --default-authentication-plugin=mysql_native_password
+    environment:
+      TZ: "Asia/Tokyo"
+      MYSQL_DATABASE: local_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: testtest
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - "./mysql/init:/docker-entrypoint-initdb.d"
     networks:
       - spring-sample-network
 

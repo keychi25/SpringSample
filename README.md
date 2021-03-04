@@ -11,7 +11,7 @@ $ make start
 
 ### production 環境
 
-```console
+```console:
 $ make prod.setup
 $ make prod.start
 ```
