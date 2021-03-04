@@ -1,0 +1,27 @@
+version: "3" # docker-composeのバージョンを指定
+services:
+  app:
+    container_name: local_springwork2000g0_app
+    build:
+      context: ../../
+      dockerfile: ./docker/local/java/Dockerfile
+    working_dir: /app
+    volumes:
+      - ../../../SpringSample:/app:cached
+    environment:
+      JAVA_ENV: development
+    ports:
+      - "8080:8080"
+    privileged: true
+    tty: true
+    command: >
+      sh -c '
+          ./gradlew
+          ./gradlew bootRun
+      '
+    networks:
+      - spring-sample-network
+
+networks:
+  spring-sample-network:
+    driver: bridge
