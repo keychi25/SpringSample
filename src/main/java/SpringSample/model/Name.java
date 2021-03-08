@@ -5,19 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class Name {
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  private Integer id;
-
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   private String name;
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
