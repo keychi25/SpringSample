@@ -26,6 +26,6 @@ public class NameService {
     }
 
     public void delete(Long id) {
-      nameRepo.deleteById(id);
+        nameRepo.deleteById(id);
     }
 }

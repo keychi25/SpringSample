@@ -21,9 +21,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
-
 jar.baseName = 'thymeleaf'
-
 
 test {
 	useJUnitPlatform()
